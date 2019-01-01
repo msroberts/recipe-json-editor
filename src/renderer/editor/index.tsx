@@ -1,8 +1,9 @@
 import { Component, h } from 'preact'
 import linkState from 'linkstate'
 
+import TextField from 'preact-material-components/TextField'
+
 import { IRecipe, RECIPE_DEFAULT, HOWTOSTEP_DEFAULT } from '../../types/schema'
-import Control from '../control'
 import { showOpenDialog } from '../helpers/remote'
 import { readFileAsync } from '../helpers/fs-async'
 
@@ -80,32 +81,35 @@ export default class Editor extends Component<IEditorProps, IEditorState> {
       <form
         onSubmit={this.formSubmit}
       >
-        <Control
+        <TextField
           label='Name'
           value={currentItem.name}
           onChange={linkState(this, 'currentItem.name')}
           type='text'
         />
 
-        <Control
+        <TextField
           label='Description'
           value={currentItem.description}
           onChange={linkState(this, 'currentItem.description')}
-          type='textarea'
+          type='text'
+          textarea={true}
         />
 
-        <Control
+        <TextField
           label='Ingredients'
           value={state.ingredients}
           onChange={linkState(this, 'ingredients')}
-          type='textarea'
+          type='text'
+          textarea={true}
         />
 
-        <Control
+        <TextField
           label='Instructions'
           value={state.instructions}
           onChange={linkState(this, 'instructions')}
-          type='textarea'
+          type='text'
+          textarea={true}
         />
 
         <button
