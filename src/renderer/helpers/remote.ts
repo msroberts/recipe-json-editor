@@ -1,4 +1,4 @@
-import { remote, SaveDialogOptions, FileFilter } from 'electron'
+import { remote, SaveDialogOptions, FileFilter, OpenDialogOptions } from 'electron'
 
 export const DEFAULT_FILTERS: FileFilter[] = [
   {
@@ -9,9 +9,15 @@ export const DEFAULT_FILTERS: FileFilter[] = [
   },
 ]
 
-export function showOpenDialog () {
+export function showOpenDialog (options?: OpenDialogOptions) {
+  if (!options) {
+    options = {
+      filters: DEFAULT_FILTERS,
+    }
+  }
+
   return new Promise<string[]>(resolve => {
-    remote.dialog.showOpenDialog({}, resolve)
+    remote.dialog.showOpenDialog(options!, resolve)
   })
 }
 
