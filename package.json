@@ -2,8 +2,14 @@
   "name": "recipe-json-editor",
   "version": "1.0.0",
   "description": "Editor for schema.org/Recipe json files",
-  "main": "index.js",
+  "main": "app/main.js",
   "scripts": {
+    "build": "npm run build:main && npm run build:renderer",
+    "build:main": "webpack --config ./configs/webpack.config.main.js",
+    "build:renderer": "webpack --config ./configs/webpack.config.renderer.js",
+    "lint": "tslint --project .",
+    "lint:fix": "tslint --fix --project .",
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +22,15 @@
   "bugs": {
     "url": "https://github.com/msroberts/recipe-json-editor/issues"
   },
-  "homepage": "https://github.com/msroberts/recipe-json-editor#readme"
+  "homepage": "https://github.com/msroberts/recipe-json-editor#readme",
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "electron": "^4.0.0",
+    "tslib": "^1.9.3",
+    "tslint": "^5.12.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.2.2",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2"
+  }
 }
