@@ -3,8 +3,12 @@ import linkState from 'linkstate'
 
 import { IRecipe, RECIPE_DEFAULT, HOWTOSTEP_DEFAULT } from '../../types/schema'
 import Control from '../control'
+import { showOpenDialog } from '../helpers/remote'
+import { readFileAsync } from '../helpers/fs-async'
 
 export interface IEditorProps {
+  onClear: () => void,
+  onOpen: (filename: string) => void,
   onSave: (currentItem: IRecipe) => void,
 }
 
@@ -44,6 +48,33 @@ export default class Editor extends Component<IEditorProps, IEditorState> {
     this.props.onSave(currentItem)
   }
 
+  openFile = async () => {
+    const [filename] = await showOpenDialog()
+
+    this.props.onOpen(filename)
+
+    const currentItem: IRecipe = JSON.parse(await readFileAsync(filename))
+
+    const ingredients = (currentItem.recipeIngredient || [])
+      .join('\n')
+
+    const instructions = (currentItem.recipeInstructions || [])
+      .map(step => step.text)
+      .join('\n')
+
+    this.setState({ currentItem, ingredients, instructions })
+  }
+
+  clearForm = () => {
+    this.setState({
+      currentItem: RECIPE_DEFAULT,
+      ingredients: '',
+      instructions: '',
+    })
+
+    this.props.onClear()
+  }
+
   render ({}: IEditorProps, { currentItem, ...state }: IEditorState) {
     return (
       <form
@@ -81,6 +112,20 @@ export default class Editor extends Component<IEditorProps, IEditorState> {
           type='submit'
         >
           Save
+        </button>
+
+        <button
+          type='button'
+          onClick={this.clearForm}
+        >
+          New
+        </button>
+
+        <button
+          type='button'
+          onClick={this.openFile}
+        >
+          Open
         </button>
       </form>
     )

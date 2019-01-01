@@ -9,6 +9,12 @@ export const DEFAULT_FILTERS: FileFilter[] = [
   },
 ]
 
+export function showOpenDialog () {
+  return new Promise<string[]>(resolve => {
+    remote.dialog.showOpenDialog({}, resolve)
+  })
+}
+
 export function showSaveDialog (options?: SaveDialogOptions) {
   if (!options) {
     options = {
