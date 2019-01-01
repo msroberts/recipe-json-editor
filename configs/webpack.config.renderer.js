@@ -1,0 +1,28 @@
+const path = require('path')
+
+module.exports = {
+  mode: 'production',
+  target: 'electron-renderer',
+  entry: './src/renderer/index.tsx',
+  output: {
+    path: path.resolve(__dirname, '..', 'app'),
+    filename: 'renderer.js',
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+  },
+  devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: 'awesome-typescript-loader',
+      },
+    ],
+  },
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
+}
