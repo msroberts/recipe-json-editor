@@ -1,3 +1,5 @@
+import 'preact-material-components/Textfield/style.css'
+
 import { Component, h } from 'preact'
 import linkState from 'linkstate'
 
