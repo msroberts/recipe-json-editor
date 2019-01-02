@@ -63,3 +63,4 @@ typings/
 # Electron
 app/**
 !app/*.html
+dist/
