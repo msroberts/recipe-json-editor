@@ -1,3 +1,5 @@
+import 'preact-material-components/Theme/style.css'
+
 import { h, Component } from 'preact'
 
 import Editor from './editor'
