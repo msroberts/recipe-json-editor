@@ -1,8 +1,10 @@
 import 'preact-material-components/Textfield/style.css'
+import 'preact-material-components/Button/style.css'
 
 import { Component, h } from 'preact'
 import linkState from 'linkstate'
 
+import Button from 'preact-material-components/Button'
 import TextField from 'preact-material-components/TextField'
 
 import { IRecipe, RECIPE_DEFAULT, HOWTOSTEP_DEFAULT } from '../../types/schema'
@@ -114,25 +116,28 @@ export default class Editor extends Component<IEditorProps, IEditorState> {
           textarea={true}
         />
 
-        <button
+        <Button
+          raised
           type='submit'
         >
           Save
-        </button>
+        </Button>
 
-        <button
+        <Button
+          raised
           type='button'
           onClick={this.clearForm}
         >
           New
-        </button>
+        </Button>
 
-        <button
+        <Button
+          raised
           type='button'
           onClick={this.openFile}
         >
           Open
-        </button>
+        </Button>
       </form>
     )
   }
