@@ -9,26 +9,24 @@ export const DEFAULT_FILTERS: FileFilter[] = [
   },
 ]
 
-export function showOpenDialog (options?: OpenDialogOptions) {
+export async function showOpenDialog (options?: OpenDialogOptions) {
   if (!options) {
     options = {
       filters: DEFAULT_FILTERS,
     }
   }
 
-  return new Promise<string[]>(resolve => {
-    remote.dialog.showOpenDialog(options!, resolve)
-  })
+  const results = await remote.dialog.showOpenDialog(options)
+  return results.filePaths
 }
 
-export function showSaveDialog (options?: SaveDialogOptions) {
+export async function showSaveDialog (options?: SaveDialogOptions) {
   if (!options) {
     options = {
       filters: DEFAULT_FILTERS,
     }
   }
 
-  return new Promise<string>((resolve) => {
-    remote.dialog.showSaveDialog(options!, resolve)
-  })
+  const results = await remote.dialog.showSaveDialog(options)
+  return results.filePath
 }

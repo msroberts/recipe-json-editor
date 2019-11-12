@@ -6,12 +6,18 @@ import { join } from 'path'
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow: BrowserWindow | null
 
-function createWindow () {
+async function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 800, height: 600 })
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  })
 
   // and load the index.html of the app.
-  mainWindow.loadFile(join(__dirname, 'index.html'))
+  await mainWindow.loadFile(join(__dirname, 'index.html'))
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -43,6 +49,6 @@ app.on('activate', function () {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
-    createWindow()
+    return createWindow()
   }
 })

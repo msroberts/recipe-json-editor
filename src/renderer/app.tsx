@@ -21,7 +21,9 @@ export default class App extends Component<{}, IAppState> {
   saveFile = async (data: IRecipe) => {
     const filename = this.state.filename || await showSaveDialog()
 
-    await writeFileAsync(filename, JSON.stringify(data, null, 2))
+    if (filename) {
+      await writeFileAsync(filename, JSON.stringify(data, null, 2))
+    }
   }
 
   clearForm = () => {
