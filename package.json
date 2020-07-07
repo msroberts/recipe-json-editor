@@ -34,7 +34,7 @@
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^2.1.1",
-    "electron": "^7.1.1",
+    "electron": "^7.2.4",
     "electron-builder": "^22.1.0",
     "linkstate": "^1.1.1",
     "node-sass": "^4.13.0",
